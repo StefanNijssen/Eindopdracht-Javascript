@@ -9,18 +9,7 @@
                 <a href="GamePicker.html"><button class="GamePicker">Game Picker</button></a>
             </nav> 
 <script>
-    
-    //import { games } from './games.js'
-    // for (var i = 0; i < games.length; i++){
-    //     var obj = games[i];
-    //     for (var key in obj){
-    //         var value = obj[key];
-    //         document.write("<br> - " + key + ": " + value);
-    //     }
-    // }
-    //let games = ["appel", "banaan", "peer"];
-
-
+ 
     
     var games = [
     {
@@ -217,12 +206,46 @@
     }
 ]
 
+// create an empty array to store selected games
+var cart = [];
+
+// create a div element to display the cart
+var cartDiv = document.createElement("div");
+cartDiv.style.marginTop = "20px";
+document.body.appendChild(cartDiv);
+
 for (var i = 0; i < games.length; i++) {
-        var game = games[i];
-        document.write("<h2>" + game.title + "</h2>");
-        document.write("<p>Price: " + game.price + "</p>");
-        document.write("<p>Genre: " + game.genre + "</p>");
-        document.write("<p>Rating: " + game.rating + "</p>");
-    }
+    var game = games[i];
+    var checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.value = game.title;
+    checkbox.name = "game";
+
+    // add event listener to checkbox element
+    checkbox.addEventListener("change", function() {
+        // check if the checkbox is checked
+        if (this.checked) {
+            // add the price of the corresponding game to the cart
+            cart.push(game.price);
+        } else {
+            // remove the price of the corresponding game from the cart
+            cart.splice(cart.indexOf(game.price), 1);
+        }
+
+        // update the contents of the cart div
+        cartDiv.innerHTML = "Cart (" + cart.length + " items): $" + cart.reduce((a, b) => a + b, 0);
+    });
+
+    var label = document.createElement("label");
+    label.appendChild(checkbox);
+    label.appendChild(document.createTextNode(game.title + " ($" + game.price + ")"));
+
+    var div = document.createElement("div");
+    div.appendChild(label);
+    div.appendChild(document.createElement("br"));
+    div.appendChild(document.createTextNode("Genre: " + game.genre + " - Rating: " + game.rating + "\n"));
+    div.style.marginBottom = "20px";
+    document.body.appendChild(div);
+}
 </script>
 </html>
