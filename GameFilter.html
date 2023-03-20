@@ -9,8 +9,7 @@
                 <a href="GamePicker.html"><button class="GamePicker">Game Picker</button></a>
             </nav> 
 <script>
- 
-    
+
     var games = [
     {
         "title": "Counter-Strike: Global Offensive",
@@ -200,7 +199,7 @@
     },
     {
         "title": "DayZ",
-        "price": 44.99,
+        "price": 34.99,
         "genre": "Simulation",
         "rating": 3
     }
@@ -215,7 +214,7 @@ cartDiv.style.marginTop = "20px";
 document.body.appendChild(cartDiv);
 
 for (var i = 0; i < games.length; i++) {
-    var game = games[i];
+    let game = games[i];
     var checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.value = game.title;
