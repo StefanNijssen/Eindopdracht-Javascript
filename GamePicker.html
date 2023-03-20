@@ -7,8 +7,244 @@
                 <a href="CallOfDuty.html"><button class="NavButton">Call Of Duty</button></a>
                 <a href="RocketLeague.html"><button class="NavButton">Rocket League</button></a>
                 <a href="GamePicker.html"><button class="GamePicker">Game Picker</button></a>
-            </nav>  
-        </header>
-        <a href="GameFilter.html"><button class="NavButton">GameFilter</button></a>
-    </body>
+            </nav> 
+<script>
+
+    var games = [
+    {
+        "title": "Counter-Strike: Global Offensive",
+        "price": 0.00,
+        "genre": "FPS",
+        "rating": 4
+    },
+    {
+        "title": "Dota 2",
+        "price": 0.00,
+        "genre": "MOBA",
+        "rating": 3
+    },
+    {
+        "title": "Goose Goose Duck",
+        "price": 4.99,
+        "genre": "Action",
+        "rating": 2
+    },
+    {
+        "title": "Apex Legends",
+        "price": 0.00,
+        "genre": "FPS",
+        "rating": 4
+    },
+    {
+        "title": "PUBG: BATTLEGROUNDS",
+        "price": 29.99,
+        "genre": "FPS",
+        "rating": 5
+    },
+    {
+        "title": "Lost Ark",
+        "price": 49.99,
+        "genre": "Action",
+        "rating": 1
+    },
+    {
+        "title": "Grand Theft Auto V",
+        "price": 29.99,
+        "genre": "FPS",
+        "rating": 3
+    },
+    {
+        "title": "Call of Duty®: Modern Warfare® II | Warzone™ 2.0",
+        "price": 19.99,
+        "genre": "FPS",
+        "rating": 3
+    },
+    {
+        "title": "Team Fortress 2",
+        "price": 0.00,
+        "genre": "FPS",
+        "rating": 5
+    },
+    {
+        "title": "Rust",
+        "price": 39.99,
+        "genre": "Action",
+        "rating": 5
+    },
+    {
+        "title": "Unturned",
+        "price": 0.00,
+        "genre": "RPG",
+        "rating": 1
+    },
+    {
+        "title": "ELDEN RING",
+        "price": 59.99,
+        "genre": "RPG",
+        "rating": 5
+    },
+    {
+        "title": "ARK: Survival Evolved",
+        "price": 10.00,
+        "genre": "RPG",
+        "rating": 1
+    },
+    {
+        "title": "War Thunder",
+        "price": 0.00,
+        "genre": "Simulation",
+        "rating": 2
+    },
+    {
+        "title": "Sid Meier's Civilization VI",
+        "price": 29.99,
+        "genre": "Simulation",
+        "rating": 3
+    },
+    {
+        "title": "Football Manager 2023",
+        "price": 59.99,
+        "genre": "Simulation",
+        "rating": 3
+    },
+    {
+        "title": "Warframe",
+        "price": 0.00,
+        "genre": "Looter-shooter",
+        "rating": 3
+    },
+    {
+        "title": "EA SPORTS™ FIFA 23",
+        "price": 59.99,
+        "genre": "Sport",
+        "rating": 1
+    },
+    {
+        "title": "Destiny 2",
+        "price": 0.00,
+        "genre": "FPS",
+        "rating": 5
+    },
+    {
+        "title": "Red Dead Redemption 2",
+        "price": 59.99,
+        "genre": "RPG",
+        "rating": 4
+    },
+    {
+        "title": "Tom Clancy's Rainbow Six Siege",
+        "price": 19.99,
+        "genre": "Simulation",
+        "rating": 3
+    },
+    {
+        "title": "The Witcher 3: Wild Hunt",
+        "price": 39.99,
+        "genre": "RPG",
+        "rating": 4
+    },
+    {
+        "title": "Terraria",
+        "price": 9.99,
+        "genre": "Sandbox",
+        "rating": 2
+    },
+    {
+        "title": "Stardew Valley",
+        "price": 14.99,
+        "genre": "Sandbox",
+        "rating": 1
+    },
+    {
+        "title": "Left 4 Dead 2",
+        "price": 9.99,
+        "genre": "FPS",
+        "rating": 4
+    },
+    {
+        "title": "Don't Starve Together",
+        "price": 5.09,
+        "genre": "RPG",
+        "rating": 3
+    },
+    {
+        "title": "MIR4",
+        "price": 19.99,
+        "genre": "RPG",
+        "rating": 3
+    },
+    {
+        "title": "PAYDAY 2",
+        "price": 9.99,
+        "genre": "Action",
+        "rating": 2
+    },
+    {
+        "title": "Path of Exile",
+        "price": 0.00,
+        "genre": "RPG",
+        "rating": 4
+    },
+    {
+        "title": "Project Zomboid",
+        "price": 14.99,
+        "genre": "Simulation",
+        "rating": 4
+    },
+    {
+        "title": "Valheim",
+        "price": 19.99,
+        "genre": "Sandbox",
+        "rating": 5
+    },
+    {
+        "title": "DayZ",
+        "price": 34.99,
+        "genre": "Simulation",
+        "rating": 3
+    }
+]
+
+// create an empty array to store selected games
+var cart = [];
+
+// create a div element to display the cart
+var cartDiv = document.createElement("div");
+cartDiv.style.marginTop = "20px";
+document.body.appendChild(cartDiv);
+
+for (var i = 0; i < games.length; i++) {
+    let game = games[i];
+    var checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.value = game.title;
+    checkbox.name = "game";
+
+    // add event listener to checkbox element
+    checkbox.addEventListener("change", function() {
+        // check if the checkbox is checked
+        if (this.checked) {
+            // add the price of the corresponding game to the cart
+            cart.push(game.price);
+        } else {
+            // remove the price of the corresponding game from the cart
+            cart.splice(cart.indexOf(game.price), 1);
+        }
+
+        // update the contents of the cart div
+        cartDiv.innerHTML = "Cart (" + cart.length + " items): $" + cart.reduce((a, b) => a + b, 0);
+    });
+
+    var label = document.createElement("label");
+    label.appendChild(checkbox);
+    label.appendChild(document.createTextNode(game.title + " ($" + game.price + ")"));
+
+    var div = document.createElement("div");
+    div.appendChild(label);
+    div.appendChild(document.createElement("br"));
+    div.appendChild(document.createTextNode("Genre: " + game.genre + " - Rating: " + game.rating + "\n"));
+    div.style.marginBottom = "20px";
+    document.body.appendChild(div);
+}
+</script>
 </html>
