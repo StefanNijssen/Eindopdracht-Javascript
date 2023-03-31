@@ -204,7 +204,29 @@
         "rating": 3
     }
 ]
+</script>
+<form>
+  <label for="price-filter">Filter op prijs (max. &euro;):</label>
+  <input type="number" id="price-filter" min="0">
+  <br>
+  <label for="genre-filter">Filter op genre:</label>
+  <select id="genre-filter">
+    <option value="">Alle genres</option>
+    <option value="action">Actie</option>
+    <option value="adventure">Avontuur</option>
+    <option value="strategy">Strategie</option>
+  </select>
+  <br>
+  <label for="rating-filter">Filter op rating (max. 5):</label>
+  <input type="number" id="rating-filter" min="0" max="5" step="0.1">
+</form>
 
+<!-- Game list -->
+<div id="game-list">
+  <!-- games will be added dynamically here -->
+</div>
+
+<script>
 // create an empty array to store selected games
 var cart = [];
 
@@ -213,8 +235,36 @@ var cartDiv = document.createElement("div");
 cartDiv.style.marginTop = "20px";
 document.body.appendChild(cartDiv);
 
-for (var i = 0; i < games.length; i++) {
-    let game = games[i];
+ // create game list element
+ var gameList = document.getElementById("game-list");
+
+// create filters
+var priceFilter = document.getElementById("price-filter");
+var genreFilter = document.getElementById("genre-filter");
+var ratingFilter = document.getElementById("rating-filter");
+
+// add event listeners to filters
+priceFilter.addEventListener("input", updateGameList);
+genreFilter.addEventListener("change", updateGameList);
+ratingFilter.addEventListener("input", updateGameList);
+
+// function to update the game list based on filters
+function updateGameList() {
+  // clear current game list
+  gameList.innerHTML = "";
+
+  // get filter values
+  var maxPrice = priceFilter.value ? parseInt(priceFilter.value) : Infinity;
+  var selectedGenre = genreFilter.value;
+  var maxRating = ratingFilter.value ? parseFloat(ratingFilter.value) : Infinity;
+
+  // filter games based on selected filters
+  var filteredGames = games.filter(function(game) {
+    return game.price <= maxPrice && (selectedGenre === "" || game.genre === selectedGenre) && game.rating <= maxRating;
+  });
+
+  // create new game list with filtered games
+  filteredGames.forEach(function(game) {
     var checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.value = game.title;
@@ -222,17 +272,17 @@ for (var i = 0; i < games.length; i++) {
 
     // add event listener to checkbox element
     checkbox.addEventListener("change", function() {
-        // check if the checkbox is checked
-        if (this.checked) {
-            // add the price of the corresponding game to the cart
-            cart.push(game.price);
-        } else {
-            // remove the price of the corresponding game from the cart
-            cart.splice(cart.indexOf(game.price), 1);
-        }
+      // check if the checkbox is checked
+      if (this.checked) {
+        // add the price of the corresponding game to the cart
+        cart.push(game.price);
+      } else {
+        // remove the price of the corresponding game from the cart
+        cart.splice(cart.indexOf(game.price), 1);
+      }
 
-        // update the contents of the cart div
-        cartDiv.innerHTML = "Cart (" + cart.length + " items): $" + cart.reduce((a, b) => a + b, 0);
+      // update the contents of the cart div
+      cartDiv.innerHTML = "Cart (" + cart.length + " items): $" + cart.reduce((a, b) => a + b, 0);
     });
 
     var label = document.createElement("label");
@@ -241,10 +291,12 @@ for (var i = 0; i < games.length; i++) {
 
     var div = document.createElement("div");
     div.appendChild(label);
+    div.classList.add('Games'); 
     div.appendChild(document.createElement("br"));
-    div.appendChild(document.createTextNode("Genre: " + game.genre + " - Rating: " + game.rating + "\n"));
-    div.style.marginBottom = "20px";
-    document.body.appendChild(div);
+    div.appendChild(document.createTextNode("Genre: " + game.genre + " - Rating: " + game.rating));
+    gameList.appendChild(div);
+  });
 }
 </script>
+    <a href="Cart.html"><button class="GamePicker">Bereken Prijs</button></a>
 </html>

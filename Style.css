@@ -10,6 +10,12 @@
     height: 180px;
  }
  
+ .Games{
+    border-style: ridge;
+    width: 35% ;
+    height: 40px;
+ }
+
  .GamePicker{
     width: 180px;
     height: 70px;
