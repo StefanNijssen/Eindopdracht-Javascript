@@ -1,8 +1,24 @@
-.NavButton{
+/* .NavButton{
     width: 180px;
     height: 70px;
     display: inline;
- }
+ } */
+ .NavButton {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #4CAF50;
+    color: #ffffff;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .NavButton:hover {
+    background-color: #45a049;
+  }
 
  .TxtBoxName{
     border-style: ridge;
@@ -16,11 +32,22 @@
     height: 40px;
  }
 
- .GamePicker{
-    width: 180px;
-    height: 70px;
-    float: right;
- }
+ .Gamepicker {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #ed0d0d;
+    color: #ffffff;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .Gamepicker:hover {
+    background-color: #ed0d0d;
+  }
 
 .Ratings{
     width: 29%;

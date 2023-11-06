@@ -1,17 +1,4 @@
-<!-- cart.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Winkelwagen</title>
-</head>
-<body>
-    <h1>Winkelwagen</h1>
-    <div id="cart-list"></div>
-    <p id="total-price"></p>
-
-    <a href="index.html">Terug naar de hoofdpagina</a>
-    <script>
-      // In cart.html JavaScript
+// In cart.html JavaScript
 document.addEventListener("DOMContentLoaded", function() {
   var cartList = document.getElementById("cart-list");
   var totalElement = document.getElementById("total-price");
@@ -38,7 +25,3 @@ document.addEventListener("DOMContentLoaded", function() {
       totalElement.style.display = "none"; // Verberg het totaalbedrag als de winkelwagen leeg is
   }
 });
-
-    </script>
-</body>
-</html>
